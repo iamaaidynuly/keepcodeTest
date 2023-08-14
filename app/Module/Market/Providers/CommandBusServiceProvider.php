@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Module\Market\Providers;
 
+use App\Module\Market\Commands\CreatePurchaseStatusCommand;
 use App\Module\Market\Commands\PurchaseBuyCreateCommand;
 use App\Module\Market\Commands\PurchaseRentCreateCommand;
 use App\Module\Market\Commands\UserLoginCommand;
 use App\Module\Market\Commands\UserRegisterCommand;
+use App\Module\Market\Handlers\CreatePurchaseStatusHandler;
 use App\Module\Market\Handlers\PurchaseBuyCreateHandler;
 use App\Module\Market\Handlers\PurchaseRentCreateHandler;
 use App\Module\Market\Handlers\UserLoginHandler;
@@ -22,7 +24,9 @@ final class CommandBusServiceProvider extends ServiceProvider
         UserLoginCommand::class         => UserLoginHandler::class,
 
         PurchaseBuyCreateCommand::class     => PurchaseBuyCreateHandler::class,
-        PurchaseRentCreateCommand::class    => PurchaseRentCreateHandler::class
+        PurchaseRentCreateCommand::class    => PurchaseRentCreateHandler::class,
+
+        CreatePurchaseStatusCommand::class  => CreatePurchaseStatusHandler::class
     ];
 
     /**

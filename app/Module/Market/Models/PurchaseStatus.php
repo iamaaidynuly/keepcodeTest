@@ -16,4 +16,14 @@ use Illuminate\Database\Eloquent\Model;
 final class PurchaseStatus extends Model
 {
     use HasFactory;
+
+    public function setPurchaseId(int $purchaseId): void
+    {
+        $this->purchase_id = $purchaseId;
+    }
+
+    public function setStatusId(int $statusId): void
+    {
+        $this->status_id = $statusId;
+    }
 }
