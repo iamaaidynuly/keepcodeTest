@@ -12,9 +12,7 @@ final class TypeRentQuery implements FindTypeOfRentByIdQuery
 
     public function findById(int $typeOfRent): ?TypeRent
     {
-        /**
- * @var TypeRent $typeOfRent 
-*/
+        /*** @var TypeRent $typeOfRent */
         $typeOfRent = TypeRent::query()->findOrFail($typeOfRent);
 
         return $typeOfRent;

@@ -72,7 +72,7 @@ final class Purchase extends Model
 
     public function getDeadline(): ?Carbon
     {
-        return $this->deadline;
+        return Carbon::parse($this->deadline);
     }
 
     public function setDeadline(?int $period): void

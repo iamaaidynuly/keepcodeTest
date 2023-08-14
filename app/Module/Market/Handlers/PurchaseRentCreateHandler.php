@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Market\Handlers;
 
 use App\Module\Market\Commands\PurchaseRentCreateCommand;
-use App\Module\Market\Contracts\Queries\FindPurchaseByUserAndProductIdQuery;
+use App\Module\Market\Contracts\Queries\FindRentPurchaseByUserAndProductIdQuery;
 use App\Module\Market\Contracts\Queries\FindTypeOfRentByIdQuery;
 use App\Module\Market\Contracts\Repositories\CreatePurchaseRepository;
 use App\Module\Market\Exceptions\PurchaseAlreadyExistsException;
@@ -14,9 +14,9 @@ use App\Module\Market\Models\Purchase;
 final class PurchaseRentCreateHandler
 {
     public function __construct(
-        private readonly FindPurchaseByUserAndProductIdQuery $query,
-        private readonly CreatePurchaseRepository $repository,
-        private readonly FindTypeOfRentByIdQuery $typeOfRentByIdQuery
+        private readonly FindRentPurchaseByUserAndProductIdQuery  $query,
+        private readonly CreatePurchaseRepository                 $repository,
+        private readonly FindTypeOfRentByIdQuery                  $typeOfRentByIdQuery
     ) {
     }
 
@@ -25,8 +25,9 @@ final class PurchaseRentCreateHandler
      */
     public function handle(PurchaseRentCreateCommand $command): void
     {
-        if ($this->query->findUserAndProductId($command->userId, $command->productId)) {
-            throw new PurchaseAlreadyExistsException("Продукт уже куплен!");
+        $rentPurchase = $this->query->findByUserAndProductId($command->userId, $command->productId);
+        if ($rentPurchase && !$rentPurchase->getDeadline()->isPast()) {
+            throw new PurchaseAlreadyExistsException("Продукт уже арендован!");
         }
         $typeRent = $this->typeOfRentByIdQuery->findById($command->typeRentId);
 

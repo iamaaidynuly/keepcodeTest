@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Module\Market\Providers;
 
-use App\Module\Market\Contracts\Queries\FindPurchaseByUserAndProductIdQuery;
+use App\Module\Market\Contracts\Queries\FindBuyedPurchaseByUserAndProductIdQuery;
+use App\Module\Market\Contracts\Queries\FindRentPurchaseByUserAndProductIdQuery;
 use App\Module\Market\Contracts\Queries\FindTypeOfRentByIdQuery;
 use App\Module\Market\Contracts\Queries\FindUserByEmailQuery;
 use App\Module\Market\Contracts\Queries\GetAllProductsPaginatedQuery;
@@ -17,9 +18,10 @@ use Illuminate\Support\ServiceProvider;
 final class QueryServiceProvider extends ServiceProvider
 {
     public array $bindings = [
-        FindUserByEmailQuery::class                 => UserQuery::class,
-        GetAllProductsPaginatedQuery::class         => ProductQuery::class,
-        FindTypeOfRentByIdQuery::class              => TypeRentQuery::class,
-        FindPurchaseByUserAndProductIdQuery::class  => PurchaseQuery::class
+        FindUserByEmailQuery::class                         => UserQuery::class,
+        GetAllProductsPaginatedQuery::class                 => ProductQuery::class,
+        FindTypeOfRentByIdQuery::class                      => TypeRentQuery::class,
+        FindBuyedPurchaseByUserAndProductIdQuery::class     => PurchaseQuery::class,
+        FindRentPurchaseByUserAndProductIdQuery::class      => PurchaseQuery::class,
     ];
 }

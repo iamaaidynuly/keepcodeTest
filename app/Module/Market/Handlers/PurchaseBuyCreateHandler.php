@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Market\Handlers;
 
 use App\Module\Market\Commands\PurchaseBuyCreateCommand;
-use App\Module\Market\Contracts\Queries\FindPurchaseByUserAndProductIdQuery;
+use App\Module\Market\Contracts\Queries\FindBuyedPurchaseByUserAndProductIdQuery;
 use App\Module\Market\Contracts\Repositories\CreatePurchaseRepository;
 use App\Module\Market\Exceptions\PurchaseAlreadyExistsException;
 use App\Module\Market\Models\Purchase;
@@ -14,7 +14,7 @@ final class PurchaseBuyCreateHandler
 {
     public function __construct(
         private readonly CreatePurchaseRepository $repository,
-        private readonly FindPurchaseByUserAndProductIdQuery $query
+        private readonly FindBuyedPurchaseByUserAndProductIdQuery $query
     ) {
     }
 
