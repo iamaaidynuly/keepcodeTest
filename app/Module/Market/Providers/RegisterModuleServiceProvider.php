@@ -18,6 +18,7 @@ final class RegisterModuleServiceProvider extends ServiceProvider
         $this->app->register(CommandBusServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(QueryServiceProvider::class);
+        $this->app->register(BindServiceProvider::class);
     }
 
 }
