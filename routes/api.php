@@ -28,5 +28,6 @@ Route::prefix('v1')->group(function() {
 
     Route::prefix('products')->middleware('auth:sanctum')->group(function () {
         Route::get('', [ProductsController::class, 'index'])->name('v1.products.index');
+        Route::put('buy/or/rent', [ProductsController::class, 'buyOrRent'])->name('v1.products.buy-or-rent');
     });
 });

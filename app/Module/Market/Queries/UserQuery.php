@@ -11,7 +11,9 @@ final class UserQuery implements FindUserByEmailQuery
 {
     public function findByEmail(string $email): ?User
     {
-        /** @var User $user */
+        /**
+ * @var User $user 
+*/
         $user = User::query()->where('email', $email)->first();
 
         return $user;

@@ -26,4 +26,9 @@ final class TypeRent extends Model
     const NAME_EIGHT_HOUR_PERIOD = 'Аренда на 8 часов';
     const NAME_TWELVE_HOUR_PERIOD = 'Аренда на 12 часов';
     const NAME_DAY_PERIOD = 'Аренда на сутки';
+
+    public function getPeriod(): int
+    {
+        return $this->period;
+    }
 }

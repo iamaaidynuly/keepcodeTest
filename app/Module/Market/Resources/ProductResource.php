@@ -9,9 +9,9 @@ use App\Module\Market\Models\Product;
 use Illuminate\Http\Request;
 
 /**
- * @property-read Product $resource
+ * @property-read                Product $resource
  * @OA\Schema(
- *     @OA\Property(property="id", type="integer", example="1"),
+ *     @OA\Property(property="id",   type="integer", example="1"),
  *     @OA\Property(property="name", type="string", example="Product"),
  * )
  */

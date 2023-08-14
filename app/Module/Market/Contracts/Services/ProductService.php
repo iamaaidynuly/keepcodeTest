@@ -9,4 +9,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface ProductService
 {
     public function getAllPaginated(): LengthAwarePaginator;
+
+    public function buyOrRent(int $productId, int $typeSaleId, ?int $typeRentId);
 }
