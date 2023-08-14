@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Market\Requests;
 
+use App\Module\Market\DTO\CreateUserDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -24,5 +25,10 @@ final class RegisterRequest extends FormRequest
             'email'     => ['required'],
             'password'  => ['required'],
         ];
+    }
+
+    public function getDto(): CreateUserDTO
+    {
+        return CreateUserDTO::fromRequest($this);
     }
 }
