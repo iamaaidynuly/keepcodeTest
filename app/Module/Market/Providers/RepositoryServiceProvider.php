@@ -6,6 +6,7 @@ namespace App\Module\Market\Providers;
 
 use App\Module\Market\Contracts\Repositories\CreatePurchaseRepository;
 use App\Module\Market\Contracts\Repositories\CreateUserRepository;
+use App\Module\Market\Contracts\Repositories\DeletePurchaseRepository;
 use App\Module\Market\Decorators\LogCreateUserDecorator;
 use App\Module\Market\Repositories\PurchaseRepository;
 use App\Module\Market\Repositories\UserRepository;
@@ -16,7 +17,8 @@ final class RepositoryServiceProvider extends ServiceProvider
     public array $bindings = [
         CreateUserRepository::class     => LogCreateUserDecorator::class,
 
-        CreatePurchaseRepository::class => PurchaseRepository::class
+        CreatePurchaseRepository::class => PurchaseRepository::class,
+        DeletePurchaseRepository::class => PurchaseRepository::class
     ];
 
     public function register(): void

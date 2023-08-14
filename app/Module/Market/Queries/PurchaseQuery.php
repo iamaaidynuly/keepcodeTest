@@ -8,7 +8,6 @@ use App\Module\Market\Contracts\Queries\FindBuyedPurchaseByUserAndProductIdQuery
 use App\Module\Market\Contracts\Queries\FindRentPurchaseByUserAndProductIdQuery;
 use App\Module\Market\Models\Purchase;
 use App\Module\Market\Models\TypeSale;
-use Carbon\Carbon;
 
 final class PurchaseQuery implements FindBuyedPurchaseByUserAndProductIdQuery, FindRentPurchaseByUserAndProductIdQuery
 {
