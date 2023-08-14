@@ -7,6 +7,7 @@ namespace App\Module\Market\Handlers;
 use App\Module\Market\Commands\PurchaseBuyCreateCommand;
 use App\Module\Market\Contracts\Queries\FindBuyedPurchaseByUserAndProductIdQuery;
 use App\Module\Market\Contracts\Repositories\CreatePurchaseRepository;
+use App\Module\Market\Events\PurchaseCreatedEvent;
 use App\Module\Market\Exceptions\PurchaseAlreadyExistsException;
 use App\Module\Market\Models\Purchase;
 
@@ -34,5 +35,7 @@ final class PurchaseBuyCreateHandler
         $purchase->setTypeSaleId($command->typeSaleId);
 
         $this->repository->create($purchase);
+
+        event(new PurchaseCreatedEvent($purchase->getId()));
     }
 }

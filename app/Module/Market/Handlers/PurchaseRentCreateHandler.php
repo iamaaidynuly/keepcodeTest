@@ -9,6 +9,7 @@ use App\Module\Market\Contracts\Queries\FindRentPurchaseByUserAndProductIdQuery;
 use App\Module\Market\Contracts\Queries\FindTypeOfRentByIdQuery;
 use App\Module\Market\Contracts\Repositories\CreatePurchaseRepository;
 use App\Module\Market\Contracts\Repositories\DeletePurchaseRepository;
+use App\Module\Market\Events\PurchaseCreatedEvent;
 use App\Module\Market\Exceptions\PurchaseAlreadyExistsException;
 use App\Module\Market\Models\Purchase;
 
@@ -18,7 +19,6 @@ final class PurchaseRentCreateHandler
         private readonly FindRentPurchaseByUserAndProductIdQuery $query,
         private readonly CreatePurchaseRepository                $createPurchaseRepository,
         private readonly FindTypeOfRentByIdQuery                 $typeOfRentByIdQuery,
-        private readonly DeletePurchaseRepository                $deletePurchaseRepository,
     ) {
     }
 
@@ -31,8 +31,6 @@ final class PurchaseRentCreateHandler
         if ($rentPurchase && !$rentPurchase->getDeadline()->isPast()) {
             throw new PurchaseAlreadyExistsException("Продукт уже арендован!");
         }
-
-        $this->deletePurchaseRepository->delete($rentPurchase);
         $typeRent = $this->typeOfRentByIdQuery->findById($command->typeRentId);
 
         $purchase = new Purchase();
@@ -44,5 +42,7 @@ final class PurchaseRentCreateHandler
         $purchase->setDeadline($typeRent->getPeriod());
 
         $this->createPurchaseRepository->create($purchase);
+
+        event(new PurchaseCreatedEvent($purchase->getId()));
     }
 }
