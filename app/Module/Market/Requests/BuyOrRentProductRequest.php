@@ -6,6 +6,14 @@ namespace App\Module\Market\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     required={"product_id", "type_sale_id", "type_rent_id"},
+ *     @OA\Property(property="product_id", type="int", example="1", description="ID продукта"),
+ *     @OA\Property(property="type_sale_id", type="int", example="1", description="ID типа продажи"),
+ *     @OA\Property(property="type_rent_id", type="int", example="1", description="ID типа аренды"),
+ * )
+ */
 final class BuyOrRentProductRequest extends FormRequest
 {
     public function rules(): array

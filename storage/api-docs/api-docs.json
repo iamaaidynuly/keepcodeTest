@@ -1,0 +1,393 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "KeepCode Test API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/v1/auth/register": {
+            "post": {
+                "tags": [
+                    "User auth"
+                ],
+                "summary": "Регистрация пользователя",
+                "operationId": "f4ecc468fbae6edf3ab99695f38351c4",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Пользователь успешно создано!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "User auth"
+                ],
+                "summary": "Логин пользователя",
+                "operationId": "6628802c5359fe3efe5360c8aa9d932c",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserShowResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Список продуктов",
+                "description": "Получить список продуктов",
+                "operationId": "84e9e0a9a50e30a5f7dcf0cd85a0a31a",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/__page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/__limit"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products/buy/or/rent": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Товар в аренду либо купить",
+                "description": "Запрос для того, чтобы купить товар либо в аренду",
+                "operationId": "e396ddee2411ab579be1e6c24836978b",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BuyOrRentProductRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Успешно принято!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products/rent/extend": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Продлить аренду товара",
+                "description": "Запрос для того, чтобы продлить аренду товара",
+                "operationId": "92d63a4d680bf54838471421c54f8adf",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RentExtendProductRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Успешно принято!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BuyOrRentProductRequest": {
+                "required": [
+                    "product_id",
+                    "type_sale_id",
+                    "type_rent_id"
+                ],
+                "properties": {
+                    "product_id": {
+                        "description": "ID продукта",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "type_sale_id": {
+                        "description": "ID типа продажи",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "type_rent_id": {
+                        "description": "ID типа аренды",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "Логин",
+                        "type": "string",
+                        "example": "London"
+                    },
+                    "password": {
+                        "description": "Пароль",
+                        "type": "string",
+                        "example": "London"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterRequest": {
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Имя",
+                        "type": "string",
+                        "example": "London"
+                    },
+                    "email": {
+                        "description": "Логин",
+                        "type": "string",
+                        "example": "London"
+                    },
+                    "password": {
+                        "description": "Пароль",
+                        "type": "string",
+                        "example": "London"
+                    }
+                },
+                "type": "object"
+            },
+            "RentExtendProductRequest": {
+                "required": [
+                    "product_id",
+                    "type_rent_id"
+                ],
+                "properties": {
+                    "product_id": {
+                        "description": "ID продукта",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "type_rent_id": {
+                        "description": "ID типа аренды",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "ProductResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Product"
+                    }
+                },
+                "type": "object"
+            },
+            "UserShowResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Jason Derulo"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "jason@mail.ru"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "__id": {
+                "name": "id",
+                "in": "path",
+                "description": "ID сущности",
+                "schema": {
+                    "type": "integer",
+                    "default": 1
+                }
+            },
+            "__x_user": {
+                "name": "X-User",
+                "in": "header",
+                "description": "User Id",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "default": 1
+                }
+            },
+            "__page": {
+                "name": "page",
+                "in": "query",
+                "description": "Номер страницы",
+                "required": false,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "__limit": {
+                "name": "limit",
+                "in": "query",
+                "description": "Количество данных для показа",
+                "required": false,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

@@ -28,7 +28,7 @@ Route::prefix('v1')->group(function() {
 
     Route::prefix('products')->middleware('auth:sanctum')->group(function () {
         Route::get('', [ProductsController::class, 'index'])->name('v1.products.index');
-        Route::put('buy/or/rent', [ProductsController::class, 'buyOrRent'])->name('v1.products.buy-or-rent');
-        Route::put('rent/extend', [ProductsController::class, 'extendRent'])->name('v1.products.rent-extend');
+        Route::post('buy/or/rent', [ProductsController::class, 'buyOrRent'])->name('v1.products.buy-or-rent');
+        Route::post('rent/extend', [ProductsController::class, 'extendRent'])->name('v1.products.rent-extend');
     });
 });

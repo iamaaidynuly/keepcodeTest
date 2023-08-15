@@ -169,7 +169,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        \App\Module\Market\Providers\RegisterModuleServiceProvider::class
+        \App\Module\Market\Providers\RegisterModuleServiceProvider::class,
+        \L5Swagger\L5SwaggerServiceProvider::class
     ])->toArray(),
 
     /*
