@@ -9,6 +9,7 @@ use App\Module\Market\Contracts\Queries\FindRentPurchaseByUserAndProductIdQuery;
 use App\Module\Market\Contracts\Queries\FindTypeOfRentByIdQuery;
 use App\Module\Market\Contracts\Queries\FindUserByEmailQuery;
 use App\Module\Market\Contracts\Queries\GetAllProductsPaginatedQuery;
+use App\Module\Market\Contracts\Queries\GetAllPurchasesByUserIdQuery;
 use App\Module\Market\Queries\ProductQuery;
 use App\Module\Market\Queries\PurchaseQuery;
 use App\Module\Market\Queries\TypeRentQuery;
@@ -23,5 +24,6 @@ final class QueryServiceProvider extends ServiceProvider
         FindTypeOfRentByIdQuery::class                      => TypeRentQuery::class,
         FindBuyedPurchaseByUserAndProductIdQuery::class     => PurchaseQuery::class,
         FindRentPurchaseByUserAndProductIdQuery::class      => PurchaseQuery::class,
+        GetAllPurchasesByUserIdQuery::class                 => PurchaseQuery::class
     ];
 }

@@ -6,10 +6,15 @@ namespace App\Module\Market\Queries;
 
 use App\Module\Market\Contracts\Queries\FindBuyedPurchaseByUserAndProductIdQuery;
 use App\Module\Market\Contracts\Queries\FindRentPurchaseByUserAndProductIdQuery;
+use App\Module\Market\Contracts\Queries\GetAllPurchasesByUserIdQuery;
 use App\Module\Market\Models\Purchase;
 use App\Module\Market\Models\TypeSale;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
-final class PurchaseQuery implements FindBuyedPurchaseByUserAndProductIdQuery, FindRentPurchaseByUserAndProductIdQuery
+final class PurchaseQuery implements FindBuyedPurchaseByUserAndProductIdQuery,
+    FindRentPurchaseByUserAndProductIdQuery,
+    GetAllPurchasesByUserIdQuery
 {
     public function findUserAndProductId(int $userId, int $productId): ?Purchase
     {
@@ -33,5 +38,15 @@ final class PurchaseQuery implements FindBuyedPurchaseByUserAndProductIdQuery, F
             ->first();
 
         return $purchase;
+    }
+
+    public function findByUserId(int $userId): Collection
+    {
+        return Purchase::query()
+            ->with(['product','statuses'])
+            ->where('user_id', $userId)
+            ->whereNull('deadline')
+            ->orWhere('deadline', '>', Carbon::now())
+            ->get();
     }
 }

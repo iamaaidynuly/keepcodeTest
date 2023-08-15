@@ -227,6 +227,44 @@
                     }
                 }
             }
+        },
+        "/api/v1/products/mine": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Список купленных\\арендованных продуктов",
+                "description": "Получить список купленных\\арендованных  продуктов",
+                "operationId": "677301c28def69bca7746f4e94153c04",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PurchaseResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -328,6 +366,52 @@
                     "name": {
                         "type": "string",
                         "example": "Product"
+                    }
+                },
+                "type": "object"
+            },
+            "PurchaseResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "product": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "typeSaleId": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "typeRentId": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "deadline": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "statuses": {
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "PurchaseStatusResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "purchaseId": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "statusId": {
+                        "type": "integer",
+                        "example": "1"
                     }
                 },
                 "type": "object"

@@ -8,15 +8,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\MessagesResource;
 use App\Module\Market\Commands\PurchaseRentCreateCommand;
 use App\Module\Market\Contracts\Services\ProductService;
+use App\Module\Market\Contracts\Services\PurchaseService;
 use App\Module\Market\Models\TypeSale;
 use App\Module\Market\Requests\BuyOrRentProductRequest;
 use App\Module\Market\Requests\RentExtendProductRequest;
 use App\Module\Market\Resources\ProductsResource;
+use App\Module\Market\Resources\PurchasesResource;
 
 final class ProductsController extends Controller
 {
     public function __construct(
-        private readonly ProductService $service
+        private readonly ProductService $service,
+        private readonly PurchaseService $purchaseService
     ) {
     }
 
@@ -141,5 +144,38 @@ final class ProductsController extends Controller
         return (new MessagesResource(null))
             ->setMessage("Успешно принято!")
             ->setStatusCode(201);
+    }
+
+    /**
+     * @OA\Get (
+     *      path="/api/v1/products/mine",
+     *      tags={"Products"},
+     *      summary="Список купленных\арендованных продуктов",
+     *      description="Получить список купленных\арендованных  продуктов",
+     *
+     *
+     *    @OA\Response(
+     *        response=200,
+     *        @OA\MediaType(
+     *            mediaType="application/json",
+     *            @OA\Schema(
+     *               @OA\Property(property="success", type="string",example="true"),
+     *               @OA\Property(property="code", type="string",example="200"),
+     *               @OA\Property(property="data", type="array",
+     *                  @OA\Items(ref="#/components/schemas/PurchaseResource")
+     *              )
+     *            )
+     *        ),
+     *        description=""
+     *    ),
+     * )
+     * @return PurchasesResource
+     */
+    public function mine(): PurchasesResource
+    {
+        $user = auth()->user();
+        $purchases = $this->purchaseService->getAllByUserId($user->getAuthIdentifier());
+
+        return new PurchasesResource($purchases);
     }
 }

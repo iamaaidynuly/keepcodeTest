@@ -30,5 +30,6 @@ Route::prefix('v1')->group(function() {
         Route::get('', [ProductsController::class, 'index'])->name('v1.products.index');
         Route::post('buy/or/rent', [ProductsController::class, 'buyOrRent'])->name('v1.products.buy-or-rent');
         Route::post('rent/extend', [ProductsController::class, 'extendRent'])->name('v1.products.rent-extend');
+        Route::get('mine', [ProductsController::class, 'mine'])->name('v1.products.mine');
     });
 });
